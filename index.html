@@ -149,6 +149,7 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(0,120,212,0.08);
     }
     .learn-more:hover {
       background: #005fa3;
@@ -167,9 +168,79 @@
       padding: 2rem;
       border-radius: 10px;
       min-width: 300px;
-      max-width: 90vw;
+      max-width: 95vw;
       box-shadow: 0 4px 24px rgba(0,0,0,0.12);
       text-align: center;
+      position: relative;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .modal input, .modal select, .modal textarea {
+      padding: 0.7rem 1rem;
+      border: 1px solid #cfd8dc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #f7f9fa;
+      transition: border 0.2s;
+    }
+    .modal input:focus, .modal select:focus, .modal textarea:focus {
+      border: 1.5px solid #0078d4;
+      outline: none;
+      background: #fff;
+    }
+    .modal label {
+      text-align: left;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 0.2rem;
+    }
+    .modal .submit-btn {
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .modal .submit-btn:hover {
+      background: #005fa3;
+    }
+    .modal .close-btn {
+      background: #eee;
+      color: #333;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      transition: background 0.2s;
+    }
+    .modal .close-btn:hover {
+      background: #ddd;
+    }
+    .modal .success-message {
+      color: #0078d4;
+      background: #eaf6ff;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 1.1rem;
     }
     .footer {
       text-align: center;
@@ -192,6 +263,40 @@
       }
       .modal {
         padding: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-header {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1.2rem 0 0.7rem 0;
+      }
+      .main-header h1 {
+        font-size: 1.4rem;
+      }
+      .hero-content {
+        padding: 0.7rem;
+        font-size: 0.98rem;
+      }
+      .about-image {
+        width: 90vw;
+        max-width: 320px;
+      }
+      .gallery-img {
+        height: 100px;
+      }
+      .modal {
+        min-width: 90vw;
+        padding: 0.7rem;
+      }
+      .modal input, .modal select, .modal textarea {
+        font-size: 0.98rem;
+        padding: 0.5rem 0.7rem;
+      }
+      .modal .close-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -249,10 +354,30 @@
     </section>
     <div class="modal-overlay" id="modalOverlay" style="display:none;">
       <div class="modal" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeModal()">Close</button>
         <h3>Learn More / Inquiry Form</h3>
         <p>Interested in Belize real estate? Enter your info and we’ll connect you with a local expert!</p>
-        <!-- Inquiry form placeholder -->
-        <button onclick="closeModal()">Close</button>
+        <form id="inquiryForm" autocomplete="off" novalidate>
+          <label for="name">Name*</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name" />
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" required placeholder="you@email.com" />
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Optional" />
+          <label for="propertyType">Property Type*</label>
+          <select id="propertyType" name="propertyType" required>
+            <option value="">Select type</option>
+            <option value="Condo">Condo</option>
+            <option value="Villa">Villa</option>
+            <option value="Land">Land</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Other">Other</option>
+          </select>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" placeholder="Tell us more (optional)"></textarea>
+          <button type="submit" class="submit-btn">Send Inquiry</button>
+        </form>
+        <div class="success-message" id="successMsg" style="display:none;">Thank you! Your inquiry has been sent.</div>
       </div>
     </div>
     <footer class="footer">
@@ -275,8 +400,36 @@
     }
     function closeModal() {
       modalOverlay.style.display = 'none';
+      document.getElementById('inquiryForm').reset();
+      document.getElementById('successMsg').style.display = 'none';
     }
     window.closeModal = closeModal;
+    // Inquiry form validation and fake submit
+    document.getElementById('inquiryForm').onsubmit = function(e) {
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var propertyType = document.getElementById('propertyType').value;
+      if (!name) {
+        document.getElementById('name').focus();
+        return false;
+      }
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('email').focus();
+        return false;
+      }
+      if (!propertyType) {
+        document.getElementById('propertyType').focus();
+        return false;
+      }
+      // Show success message
+      document.getElementById('successMsg').style.display = 'block';
+      // Optionally, hide form fields
+      setTimeout(function() {
+        closeModal();
+      }, 2000);
+      return false;
+    };
   </script>
 </body>
 </html> 
