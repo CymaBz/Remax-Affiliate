@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remax VIP Belize Affiliate Landing</title>
+  <link rel="icon" href="images/partners.jpg" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7f9fa;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .main-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 0 1rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .partners-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #0078d4;
+    }
+    .main-header h1 {
+      font-size: 2.2rem;
+      color: #0078d4;
+      margin: 0;
+    }
+    .referral {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      background: #fffbe6;
+      color: #b8860b;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      display: inline-block;
+    }
+    .hero {
+      position: relative;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .hero-image {
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      background: rgba(0,0,0,0.45);
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    }
+    .about-belize {
+      margin: 2.5rem 0 1.5rem 0;
+      text-align: center;
+    }
+    .about-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .about-image {
+      width: 260px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .about-text {
+      max-width: 350px;
+      text-align: left;
+    }
+    .about-text ul {
+      padding-left: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .market-info {
+      background: #eaf6ff;
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,120,212,0.04);
+    }
+    .gallery {
+      margin: 2.5rem 0 1.5rem 0;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+    .gallery-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .gallery-img:hover {
+      transform: scale(1.04);
+    }
+    .partners {
+      margin: 2.5rem 0 1.5rem 0;
+      text-align: center;
+    }
+    .partners-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #0078d4;
+      margin-bottom: 1rem;
+    }
+    .learn-more {
+      background: #0078d4;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .learn-more:hover {
+      background: #005fa3;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      min-width: 300px;
+      max-width: 90vw;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    .footer {
+      text-align: center;
+      margin: 2rem 0 1rem 0;
+      color: #888;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 900px) {
+      .about-flex {
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .hero-content {
+        width: 95%;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+      .about-image {
+        max-width: 95vw;
+      }
+      .modal {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <img src="images/partners.jpg" alt="Partners" class="partners-logo" />
+      <h1>Remax VIP Belize</h1>
+      <p class="referral">You have been referred by one of our partners Truly Wild Belize</p>
+    </header>
+    <section class="hero">
+      <img src="images/belize-hero.jpg" alt="Belize" class="hero-image" />
+      <div class="hero-content">
+        <h2>Discover Paradise in Belize</h2>
+        <p>
+          Welcome to your gateway to the Caribbean! Explore investment opportunities and dream homes in beautiful Belize with Remax VIP.
+        </p>
+      </div>
+    </section>
+    <section class="about-belize">
+      <h2>Why Belize?</h2>
+      <div class="about-flex">
+        <img src="images/belize-market.jpg" alt="Belize Real Estate" class="about-image" />
+        <div class="about-text">
+          <ul>
+            <li>English-speaking, stable democracy</li>
+            <li>Stunning beaches, rainforests, and Mayan ruins</li>
+            <li>Attractive property prices and no capital gains tax</li>
+            <li>Growing expat and investor community</li>
+          </ul>
+          <button class="learn-more" id="learnMoreBtn">Learn More</button>
+        </div>
+      </div>
+    </section>
+    <section class="market-info">
+      <h2>Belize Real Estate Market</h2>
+      <p>
+        The Belize real estate market is booming, with opportunities for beachfront villas, condos, and land investments. Whether you’re looking for a vacation home or a smart investment, our team can help you find the perfect property.
+      </p>
+    </section>
+    <section class="gallery">
+      <h2>Explore Belize</h2>
+      <div class="gallery-grid">
+        <img src="images/pg1.jpg" alt="Belize 1" class="gallery-img" />
+        <img src="images/pg2.jpg" alt="Belize 2" class="gallery-img" />
+        <img src="images/pg3.jpg" alt="Belize 3" class="gallery-img" />
+        <img src="images/pg4.jpg" alt="Belize 4" class="gallery-img" />
+      </div>
+    </section>
+    <section class="partners">
+      <h2>Our Trusted Partners</h2>
+      <img src="images/partners.jpg" alt="Partners" class="partners-img" />
+      <p>Work with the best! Our partners, including Truly Wild Belize, ensure you get the best service and local expertise.</p>
+    </section>
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+      <div class="modal" onclick="event.stopPropagation()">
+        <h3>Learn More / Inquiry Form</h3>
+        <p>Interested in Belize real estate? Enter your info and we’ll connect you with a local expert!</p>
+        <!-- Inquiry form placeholder -->
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> Remax VIP Belize. All rights reserved.</p>
+    </footer>
+  </div>
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Modal logic
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    if (learnMoreBtn && modalOverlay) {
+      learnMoreBtn.onclick = function() {
+        modalOverlay.style.display = 'flex';
+      };
+      modalOverlay.onclick = function() {
+        modalOverlay.style.display = 'none';
+      };
+    }
+    function closeModal() {
+      modalOverlay.style.display = 'none';
+    }
+    window.closeModal = closeModal;
+  </script>
+</body>
+</html> 
